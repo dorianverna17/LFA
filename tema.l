@@ -3,6 +3,7 @@
 
 #undef yywrap
 
+// variabile necesare
 int count_vertexes;
 int count_textures;
 int count_faces;
@@ -36,7 +37,7 @@ vertex_homogenous		"("{float_number}[ \n\t]+{float_number}[ \n\t]+{float_number}
 face_aux				{natural_number}[ \n\t]+
 face					{face_aux}+{natural_number}";"
 
-texture_image_name		[^ \n]+
+texture_image_name		[^ \n\t]+
 
 %s MAY_BE_OBJECT_FOUND GET_OBJECT_PROPERTIES CHECK_PARANTHESIS COUNT_VERTEXES COUNT_TEXTURES COUNT_FACES
 %s GET_IMAGE_NAME
@@ -128,6 +129,7 @@ char** list_files;
 int current_file;
 int nr_files;
 
+// functia main
 void main(int argc, char **argv) {
 	FILE *file;
 	list_files = argv + 1;
@@ -146,6 +148,7 @@ void main(int argc, char **argv) {
 }
 
 int yywrap() {
+	// citesc mai multe fisiere
 	FILE *file = NULL;
 
 	fclose(yyin);
